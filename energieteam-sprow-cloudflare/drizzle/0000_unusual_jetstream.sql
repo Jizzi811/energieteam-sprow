@@ -1,0 +1,21 @@
+CREATE TABLE `leads` (
+	`id` text PRIMARY KEY NOT NULL,
+	`name` text NOT NULL,
+	`email` text NOT NULL,
+	`phone` text DEFAULT '' NOT NULL,
+	`postcode` text NOT NULL,
+	`home` text NOT NULL,
+	`place` text NOT NULL,
+	`direction` text NOT NULL,
+	`shade` text NOT NULL,
+	`bill` text NOT NULL,
+	`storage` text NOT NULL,
+	`service` text DEFAULT 'Komplettservice' NOT NULL,
+	`timing` text NOT NULL,
+	`score` integer DEFAULT 0 NOT NULL,
+	`status` text DEFAULT 'Neu' NOT NULL,
+	`photo_key` text,
+	`photo_name` text,
+	`created_at` text DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	`updated_at` text DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
