@@ -19,9 +19,7 @@ const CALLBACK_PATH = "/callback";
 
 export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
   const requestHeaders = await headers();
-  const email =
-    requestHeaders.get(USER_EMAIL_HEADER) ??
-    requestHeaders.get(CLOUDFLARE_ACCESS_EMAIL_HEADER);
+  const email = requestHeaders.get(USER_EMAIL_HEADER) ?? requestHeaders.get(CLOUDFLARE_ACCESS_EMAIL_HEADER);
   if (!email) return null;
 
   const encodedFullName = requestHeaders.get(USER_FULL_NAME_HEADER);
@@ -53,11 +51,6 @@ export function chatGPTSignInPath(returnTo: string): string {
 }
 
 export function chatGPTSignOutPath(returnTo = "/"): string {
-  // Cloudflare Access owns this route on standalone Cloudflare deployments.
-  // ChatGPT Sites continues to use its dispatch-owned sign-out route.
-  if (process.env.CLOUDFLARE_DEPLOYMENT === "true") {
-    return "/cdn-cgi/access/logout";
-  }
   const safeReturnTo = safeRelativeReturnPath(returnTo);
   return `${SIGN_OUT_PATH}?return_to=${encodeURIComponent(safeReturnTo)}`;
 }
