@@ -7,5 +7,23 @@
   "assets": {
     "directory": "dist/client",
     "binding": "ASSETS"
-  }
+  },
+  "vars": {
+    // Steuert in app/chatgpt-auth.ts den Logout-Pfad auf Cloudflare Access
+    // (/cdn-cgi/access/logout). Auf einem Cloudflare-Deploy muss das "true" sein.
+    "CLOUDFLARE_DEPLOYMENT": "true"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "energieteam-sprow-leads",
+      "database_id": "cf110329-5c70-4a93-9d18-e8d71b027410"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "energieteam-sprow-uploads"
+    }
+  ]
 }
