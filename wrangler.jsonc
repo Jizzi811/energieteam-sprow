@@ -16,17 +16,14 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "energieteam-sprow-db",
-      // WICHTIG: Vor dem ersten produktiven Deploy die echte database_id eintragen
-      // (wird beim Anlegen der D1-Datenbank vergeben). Ohne gueltige ID werden
-      // Leads nicht gespeichert.
-      "database_id": "PLACEHOLDER_D1_DATABASE_ID"
+      "database_name": "energieteam-sprow-leads",
+      "database_id": "cf110329-5c70-4a93-9d18-e8d71b027410"
     }
   ],
   "r2_buckets": [
     {
       "binding": "BUCKET",
-      "bucket_name": "energieteam-sprow-photos"
+      "bucket_name": "energieteam-sprow-uploads"
     }
   ]
 }

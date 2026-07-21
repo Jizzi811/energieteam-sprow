@@ -13,31 +13,28 @@ dashboard.
 - Node.js 22+ (`.node-version` pins 22 for Cloudflare Builds)
 - `npm install` once locally if you run wrangler commands by hand
 
-## 1. Create the D1 database and R2 bucket
+## 1. D1 database and R2 bucket — already provisioned ✅
+
+These already exist in the account and are wired into `wrangler.jsonc`:
+
+| Resource | Binding | Name                        |
+| -------- | ------- | --------------------------- |
+| D1       | `DB`    | `energieteam-sprow-leads`   |
+| R2       | `BUCKET`| `energieteam-sprow-uploads` |
+
+The `leads` table has been created from `drizzle/0000_unusual_jetstream.sql`,
+and the real `database_id` is committed in `wrangler.jsonc`. Nothing to do here.
+
+<details><summary>How to reproduce from scratch (only if you rebuild the account)</summary>
 
 ```bash
-npx wrangler d1 create energieteam-sprow-db        # prints a database_id
-npx wrangler r2 bucket create energieteam-sprow-photos
-```
-
-Copy the printed `database_id` into `wrangler.jsonc`, replacing
-`PLACEHOLDER_D1_DATABASE_ID`:
-
-```jsonc
-"d1_databases": [
-  { "binding": "DB", "database_name": "energieteam-sprow-db",
-    "database_id": "<the id from wrangler>" }
-]
-```
-
-Then load the schema (creates the `leads` table):
-
-```bash
-npx wrangler d1 execute energieteam-sprow-db --remote \
+npx wrangler d1 create energieteam-sprow-leads     # prints a database_id
+npx wrangler r2 bucket create energieteam-sprow-uploads
+# put the printed database_id into wrangler.jsonc, then:
+npx wrangler d1 execute energieteam-sprow-leads --remote \
   --file=drizzle/0000_unusual_jetstream.sql
 ```
-
-Commit the updated `wrangler.jsonc`.
+</details>
 
 ## 2. Deploy the Worker from GitHub
 
